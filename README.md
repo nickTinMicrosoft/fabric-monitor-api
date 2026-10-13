@@ -1,40 +1,20 @@
 # Fabric Monitor API
 
-A curated list of links and subjects for monitoring Microsoft Fabric via APIs.
+Azure offers many monitoring solutions. This repo is a curated collection of documentation links, not original content. Each solution area has its own page with a short summary and the relevant links.
 
-Each link was fetched and checked (all return HTTP 200). The **Fabric-specific?** column shows whether the page itself is about Fabric:
+Each link was fetched and checked (all return HTTP 200). Microsoft Fabric has its own monitoring surface, so it is listed first. The Azure Monitor pages are general Azure documentation and do not mention Fabric. They apply to Fabric only for Azure-side telemetry of Fabric capacities (`Microsoft.Fabric/capacities`).
 
-- **Yes** – a Fabric page.
-- **Partial** – the page is not Fabric-branded (Power BI API), but the API covers Fabric activity.
-- **No (generic)** – general Azure Monitor documentation. It applies only to Azure resources such as a Fabric capacity (`Microsoft.Fabric/capacities`) when diagnostic settings or logs are routed to Azure Monitor. These pages do not mention Fabric.
+## Monitoring solutions
 
-| Area | Link | Fabric-specific? |
-|------|------|------------------|
-| Azure Monitor REST API reference | https://learn.microsoft.com/en-us/rest/api/monitor/ | No (generic) |
-| Azure Monitor REST API index | https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/azure-monitor-rest-api-index | No (generic) |
-| Azure Monitor Logs Query API overview | https://learn.microsoft.com/en-us/azure/azure-monitor/logs/api/overview | No (generic) |
-| Log Analytics REST APIs | https://learn.microsoft.com/en-us/rest/api/loganalytics/ | No (generic) |
-| Logs Ingestion API | https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview | No (generic) |
-| Azure Monitor metrics API | https://learn.microsoft.com/en-us/rest/api/monitor/metrics/list | No (generic) |
-| Azure Monitor metric definitions API | https://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list | No (generic) |
-| Azure Monitor activity logs API | https://learn.microsoft.com/en-us/rest/api/monitor/activity-logs/list | No (generic) |
-| Azure Monitor diagnostic settings API | https://learn.microsoft.com/en-us/rest/api/monitor/diagnostic-settings | No (generic) |
-| Azure Monitor scheduled query rules / log alerts | https://learn.microsoft.com/en-us/rest/api/monitor/scheduled-query-rules | No (generic) |
-| Azure Monitor action groups | https://learn.microsoft.com/en-us/rest/api/monitor/action-groups | No (generic) |
-| Microsoft Fabric REST API docs | https://learn.microsoft.com/en-us/rest/api/fabric/articles/ | Yes |
-| Using Microsoft Fabric REST APIs | https://learn.microsoft.com/en-us/rest/api/fabric/articles/get-started/using-fabric-apis | Yes |
-| Fabric API scopes | https://learn.microsoft.com/en-us/rest/api/fabric/articles/scopes | Yes |
-| Fabric API throttling | https://learn.microsoft.com/en-us/rest/api/fabric/articles/throttling | Yes |
-| Fabric API pagination | https://learn.microsoft.com/en-us/rest/api/fabric/articles/pagination | Yes |
-| Fabric API long-running operations | https://learn.microsoft.com/en-us/rest/api/fabric/articles/long-running-operation | Yes |
-| Fabric Capacities REST API | https://learn.microsoft.com/en-us/rest/api/microsoftfabric/fabric-capacities?view=rest-microsoftfabric-2023-11-01 | Yes (ARM resource provider) |
-| Fabric Capacity Metrics app | https://learn.microsoft.com/en-us/fabric/enterprise/metrics-app | Yes |
-| Fabric admin monitoring workspace | https://learn.microsoft.com/en-us/fabric/admin/monitoring-workspace | Yes |
-| Track user activities in Fabric | https://learn.microsoft.com/en-us/fabric/admin/track-user-activities | Yes |
-| Power BI/Fabric Admin Activity Events API | https://learn.microsoft.com/en-us/rest/api/power-bi/admin/get-activity-events | Partial (Power BI API) |
-| OneLake overview, including diagnostics | https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview | Yes (overview; diagnostics is a subtopic) |
+| # | Solution | What it covers | Fabric-specific? |
+|---|----------|----------------|------------------|
+| 1 | [Microsoft Fabric](docs/fabric.md) | Fabric REST API, capacities, Capacity Metrics app, admin monitoring workspace, user activity, OneLake | Yes (one partial link) |
+| 2 | [Azure Monitor (platform overview)](docs/azure-monitor.md) | REST API reference and index | No (generic) |
+| 3 | [Azure Monitor Metrics](docs/azure-monitor-metrics.md) | Metrics and metric definitions APIs | No (generic) |
+| 4 | [Azure Monitor Logs and Log Analytics](docs/azure-monitor-logs.md) | Logs Query, Log Analytics and Logs Ingestion APIs | No (generic) |
+| 5 | [Activity Logs and Diagnostic Settings](docs/azure-activity-and-diagnostics.md) | Control-plane events and log/metric routing | No (generic) |
+| 6 | [Alerts and Action Groups](docs/azure-monitor-alerts.md) | Scheduled query rules (log alerts) and notifications | No (generic) |
 
-## Summary
+## Link check summary
 
-- 11 of 23 links are Fabric-specific, 1 is partial and 11 are generic Azure Monitor.
-- The 11 generic Azure Monitor links came from a broad monitoring search. They are useful only for Azure-side telemetry of Fabric capacities, not for Fabric workspace or item monitoring.
+- 23 links in total: 11 Fabric-specific, 1 partial (Power BI Admin Activity Events API) and 11 generic Azure Monitor.
