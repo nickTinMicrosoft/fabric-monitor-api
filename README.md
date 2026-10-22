@@ -10,6 +10,8 @@ External documentation links were fetched and checked (HTTP 200 after redirects)
 
 Start here to build an external Airflow workflow that starts Fabric ingestion, monitors job completion, runs dbt against Warehouse or Lakehouse/Spark, and handles failure. Includes authentication, execution APIs, Airflow operators, dbt adapters, CI/CD references, and the alternative Fabric-owned orchestration pattern.
 
+Read the [Good to knows](docs/fabric-api-etl-orchestration.md#good-to-knows) for documented limits, credential/identity caveats, and the unresolved pipeline API documentation warning. Fabric-hosted Airflow and managed dbt restrictions are distinguished from external-runner behavior.
+
 ### Two-slide architecture deck
 
 [PowerPoint](assets/Fabric-External-Orchestration-Architecture.pptx) | [PDF](assets/Fabric-External-Orchestration-Architecture.pdf)
@@ -37,7 +39,7 @@ The diagrams show architectural patterns, not a deployed integration. A dbt Core
 ## Link check summary
 
 - Monitoring catalog: 23 reference links, including 11 Fabric-specific, 1 partial (Power BI Admin Activity Events API), and 11 generic Azure Monitor.
-- The complete library contains 56 unique external reference URLs, including the separate orchestration catalog's Microsoft, Apache Airflow, and dbt references. Links were checked on October 22, 2026; redirected documentation URLs are followed.
+- The complete library contains 57 unique external reference URLs, including the separate orchestration catalog's Microsoft, Apache Airflow, and dbt references. Links were checked on October 22, 2026; redirected documentation URLs are followed.
 
 ## Rebuild the architecture deck
 

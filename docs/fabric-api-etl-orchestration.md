@@ -40,6 +40,25 @@ Airflow DAG
 
 Airflow coordinates work. Fabric's ingestion activities move data. dbt manages model dependencies and tests; Warehouse or Spark executes the transformation queries. Bronze/Silver/Gold are logical layers, not mandatory product assignments. Plan source access and cross-engine movement explicitly.
 
+## Good to knows
+
+Reviewed October 22, 2026. Separate documented limits from operational design requirements and unresolved documentation; none of these identifies the root cause of a particular customer's support case.
+
+| Applies to | Good to know | Official reference |
+|------------|--------------|--------------------|
+| External Airflow -> Fabric: identity | The scheduler API supporting an application identity does not guarantee every invoked item, activity, or downstream connection supports it. Verify tenant settings, workspace/item access, and the complete execution chain. | [Identity support](https://learn.microsoft.com/en-us/rest/api/fabric/articles/identity-support) |
+| External orchestration: execution and retries | `202 Accepted` is submission, not success. Save the job-instance reference, poll to a terminal outcome, honor `Retry-After`, and handle throttling/timeouts. Reconcile ambiguous submissions before retrying to avoid duplicate work. | [Run job](https://learn.microsoft.com/en-us/rest/api/fabric/core/job-scheduler/run-on-demand-item-job), [Get job status](https://learn.microsoft.com/en-us/rest/api/fabric/core/job-scheduler/get-item-job-instance) |
+| External orchestration: parameters | The generic Job Scheduler request's `parameters` property is not supported by every item/job type. Verify the actual pipeline execution payload; do not assume a generic example works unchanged. | [Run job request body](https://learn.microsoft.com/en-us/rest/api/fabric/core/job-scheduler/run-on-demand-item-job) |
+| Fabric pipeline scale | The documented limits include 120 activities per pipeline, including nested activities, and 100 concurrent external activities such as Web/WebHook per workspace. These are not dbt model limits: dbt should manage its model dependency graph rather than requiring one pipeline activity per model. | [Data Factory limitations and resource limits](https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-limitations) |
+| Fabric pipeline credentials | Background authentication synchronization is not performed for pipelines. The documentation recommends a minor pipeline update/save to refresh cached authentication after relevant user-credential changes. Do not assume changing a credential alone refreshes every running workflow. | [Pipeline limitations](https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-limitations) |
+| Fabric-hosted Airflow only | Private/virtual networks are currently unsupported. This is a restriction of Fabric's hosted Airflow option, not automatically of an externally hosted Airflow deployment. External deployments still need approved network access to Fabric and their data sources. | [Fabric Airflow concepts](https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-jobs-concepts) |
+| Fabric-managed dbt only | The feature is preview. Prior-run artifacts are unavailable for recompilation; importing projects above 5,000 files is unsupported; GitHub fetch requires a classic PAT and repo-root `dbt_project.yml`. These are not blanket restrictions on an external dbt runner and are not a 1,000-model limit. | [Managed dbt overview and limitations](https://learn.microsoft.com/en-us/fabric/data-factory/dbt-job-overview) |
+
+> [!IMPORTANT]
+> **Unresolved documentation scope:** The [pipeline REST API capabilities article](https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-rest-api-capabilities) includes a "JOB Limitation" under Current limitations saying an invoked run never succeeds, without identifying the affected scenario. The same article documents pipeline execution and monitoring. Obtain Microsoft clarification and validate the intended scenario; neither ignore the warning nor treat it as a verified universal failure of API-triggered pipelines.
+
+Before describing an integration as production-ready, exercise the real identity, connections, parameter payload, transformations/tests, and success/failure/retry paths in a small end-to-end pilot.
+
 ## 1. Authentication and permissions
 
 | Reference | Use it for |
