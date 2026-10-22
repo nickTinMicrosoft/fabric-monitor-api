@@ -2,6 +2,8 @@
 
 [Home](../README.md)
 
+For starting and coordinating data workloads, see [Fabric API - ETL Orchestration](fabric-api-etl-orchestration.md). The references below focus on monitoring.
+
 ## Summary
 
 Fabric has its own monitoring surface, separate from Azure Monitor. It covers capacity health and consumption, tenant and workspace activity, item operations through the Fabric REST API, and OneLake storage. Use these links first when the question is about Fabric itself.

@@ -1,0 +1,22 @@
+{
+  "slide_count": 2,
+  "slides": [
+    {
+      "slide": 1,
+      "images": 6,
+      "connections": 5,
+      "source_hyperlinks": 4
+    },
+    {
+      "slide": 2,
+      "images": 9,
+      "connections": 12,
+      "source_hyperlinks": 3
+    }
+  ],
+  "customer_neutral": true,
+  "local_links": 28,
+  "checked_reference_urls": 56,
+  "text_overflow": false,
+  "pdf_is_static": true
+}

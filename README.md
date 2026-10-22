@@ -1,8 +1,27 @@
 # Fabric Monitor API
 
-Azure offers many monitoring solutions. This repo is a curated collection of documentation links, not original content. Each solution area has its own page with a short summary and the relevant links.
+This repo is a curated library of documentation links for Fabric monitoring, Fabric API orchestration, and Azure monitoring. Each solution area has its own page with short summaries and relevant references. The linked product documentation is authoritative; integration sketches are illustrative, not tested deployments.
 
-Each link was fetched and checked (all return HTTP 200). Microsoft Fabric has its own monitoring surface, so it is listed first. The Azure Monitor pages are general Azure documentation and do not mention Fabric. They apply to Fabric only for Azure-side telemetry of Fabric capacities (`Microsoft.Fabric/capacities`).
+External documentation links were fetched and checked (HTTP 200 after redirects). Microsoft Fabric has its own monitoring surface, so it is listed first. The Azure Monitor pages are general Azure documentation and do not mention Fabric. They apply to Fabric only for Azure-side telemetry of Fabric capacities (`Microsoft.Fabric/capacities`).
+
+## Fabric API - ETL Orchestration
+
+[Open the Airflow, dbt, and Fabric orchestration reference library](docs/fabric-api-etl-orchestration.md).
+
+Start here to build an external Airflow workflow that starts Fabric ingestion, monitors job completion, runs dbt against Warehouse or Lakehouse/Spark, and handles failure. Includes authentication, execution APIs, Airflow operators, dbt adapters, CI/CD references, and the alternative Fabric-owned orchestration pattern.
+
+### Two-slide architecture deck
+
+[PowerPoint](assets/Fabric-External-Orchestration-Architecture.pptx) | [PDF](assets/Fabric-External-Orchestration-Architecture.pdf)
+
+The PowerPoint contains two generic, customer-neutral diagrams with original illustrated icons, editable connections, clickable documentation links, and presenter notes. The PDF is a static sharing copy.
+
+| Slide | Architecture | Preview |
+|-------|--------------|---------|
+| 1 | Externally hosted Airflow/dbt coordinates Fabric ingestion and transformations | [View slide](assets/architecture-previews/slide-01.png) |
+| 2 | Fabric pipelines start and monitor an externally hosted dbt job service | [View slide](assets/architecture-previews/slide-02.png) |
+
+The diagrams show architectural patterns, not a deployed integration. A dbt Core installation requires a hosting/job-service API before Fabric can launch it remotely.
 
 ## Monitoring solutions
 
@@ -17,4 +36,16 @@ Each link was fetched and checked (all return HTTP 200). Microsoft Fabric has it
 
 ## Link check summary
 
-- 23 links in total: 11 Fabric-specific, 1 partial (Power BI Admin Activity Events API) and 11 generic Azure Monitor.
+- Monitoring catalog: 23 reference links, including 11 Fabric-specific, 1 partial (Power BI Admin Activity Events API), and 11 generic Azure Monitor.
+- The complete library contains 56 unique external reference URLs, including the separate orchestration catalog's Microsoft, Apache Airflow, and dbt references. Links were checked on October 22, 2026; redirected documentation URLs are followed.
+
+## Rebuild the architecture deck
+
+With `python-pptx` and `Pillow` available (dependencies listed in `tools/requirements.txt`):
+
+```powershell
+python .\tools\build_architecture_deck.py
+.\tools\render_architecture_deck.ps1
+```
+
+The first command generates the PowerPoint and original icon images. The second requires Windows with Microsoft PowerPoint installed and exports the PDF and slide previews while checking text fit. It opens the generated deck read-only, closes only that presentation, and does not quit PowerPoint or close user-owned presentations.
